@@ -6,21 +6,37 @@ import home3 from "../assets/villa.jpeg"
 
 const Properties = () => {
   return (
-    <div className="properties">
+    <div className="properties" style={{ marginTop: '-100px' }}>
       <h2 className="properties-title">Nos Annonces Disponibles</h2>
       <div className="property-list">
-        <Link to="" className="property-link">
-          <img src={home1} alt="home1" className="property-image" />
-          <h3 className="property-title">Logement promotionnel public LPP</h3>
-        </Link>
-        <Link to="" className="property-link">
-          <img src={home2} alt="home2" className="property-image" />
-          <h3 className="property-title">Villa à Tigzirt</h3>
-        </Link>
-        <Link to="" className="property-link">
-          <img src={home3} alt="home3" className="property-image" />
-          <h3 className="property-title">Villa à Azazga</h3>
-        </Link>
+        <div className="property-card">
+          <Link to="" className="property-link">
+            <div className="card-content">
+              <img src={home1} alt="home1" className="property-image" />
+              <h3 className="property-title">Logement promotionnel public LPP</h3>
+              
+              <p className="property-price">Prix : $1200,000</p>
+            </div>
+          </Link>
+        </div>
+        <div className="property-card">
+          <Link to="" className="property-link">
+            <div className="card-content">
+              <img src={home2} alt="home2" className="property-image" />
+              <h3 className="property-title">Villa à Tigzirt</h3>
+              <p className="property-price">Prix : $300,000</p>
+            </div>
+          </Link>
+        </div>
+        <div className="property-card">
+          <Link to="" className="property-link">
+            <div className="card-content">
+              <img src={home3} alt="home3" className="property-image" />
+              <h3 className="property-title">Villa à Azazga</h3>
+              <p className="property-price">Prix : $300,000</p>
+            </div>
+          </Link>
+        </div>
       </div>
 
       <style>
@@ -30,18 +46,11 @@ const Properties = () => {
             text-align: center;
           }
 
-
           .properties-title {
-            font-size: 2.5em;  */
-            font-weight: bold; /* Police en gras */
-            color: #333; /* Couleur du texte */
-            margin-bottom: 30px; /* Espacement en bas du titre */
-          }
-
-          .property-title {
-            font-weight: bold; /* Texte en gras */
-            font-size: 1.2em; /* Taille de la police */
-            margin-top: 10px; /* Espacement en haut du titre */
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
           }
 
           .property-list {
@@ -50,21 +59,40 @@ const Properties = () => {
             flex-wrap: wrap;
           }
 
+          .property-card {
+            width: 300px;
+            margin-bottom: 20px;
+            background-color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+          }
+
           .property-link {
             text-decoration: none;
             color: inherit;
           }
 
+          .card-content {
+            padding: 15px;
+          }
+
           .property-image {
-            width: 300px;
+            width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             transition: transform 0.3s ease;
           }
 
-          .property-image:hover {
+          .property-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+          }
+
+          .property-card:hover .property-image {
             transform: scale(1.05);
           }
         `}

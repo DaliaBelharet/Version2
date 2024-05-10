@@ -6,6 +6,7 @@ import SignUpForm from '../src/pages/auth/SignUpForm';
 import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
 import Logout from './pages/auth/logout';
+import Search from './pages/search';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/Search' element={<Search />} />
         <Route path='/logout' element={<Logout />} />
 
 

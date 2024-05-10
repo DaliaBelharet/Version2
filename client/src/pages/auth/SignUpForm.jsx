@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import SignInForm from "./SignInForm";
+import Navbar from '../../components/Navbar'; 
 import Avatar from '@mui/material/Avatar';
 import axios from 'axios';
 import Button from '@mui/material/Button';
@@ -55,9 +56,11 @@ const SignUp = () => {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <Navbar sx={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }} />
+      
         <Box
           sx={{
-            marginTop: 3,
+            marginTop: 9,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

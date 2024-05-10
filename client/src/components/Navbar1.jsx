@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
-import logo from "../assets/DARKOUM1.png";
+import logo from "../assets/DARKOUM.png";
 import Logout from '../pages/auth/logout';
 
 const Navbar = () => {
@@ -19,9 +19,10 @@ const Navbar = () => {
             top: 0,
             left: 0,
             width: '100%',
+            height: '80px', // Nouvelle hauteur
             backgroundColor: 'white',
             color: 'black',
-            padding: '15px 15px',
+            padding: '10px 20px', // Réduction du padding
             zIndex: 1000,
             display: 'flex', 
             justifyContent: 'space-between', 
@@ -35,14 +36,14 @@ const Navbar = () => {
                 display: 'flex',
                 justifyContent: 'flex-end'
             }}>
-                <li style={{ marginRight:30,
+                <li style={{ marginRight:20, // Réduction de la marge
                     fontWeight: 'bold',
                 }}>
                     <Link to="/">Accueil</Link>
                 </li>
-                <li style={{  marginRight:30,
+                <li style={{  marginRight:20, // Réduction de la marge
                     fontWeight: 'bold',
-                    marginLeft: 30
+                    marginLeft: 20
                 }}>
                     <div id="nos-services">
                     <a href="#nos-services">Nos services</a>
@@ -50,7 +51,7 @@ const Navbar = () => {
                 </li>
                 <li style={{ 
                     fontWeight: 'bold',
-                    marginLeft: 30
+                    marginLeft: 20
                 }}>
                     <a href="#">A propos</a>
                 </li>

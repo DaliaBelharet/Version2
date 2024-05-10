@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar1 from '../components/Navbar1';
+import Navbar from '../components/Navbar';
 import Footer from '../components/footer';
 import Section from '../components/Section';
 import Properties from '../components/properties';
@@ -9,13 +9,14 @@ const Home = () => {
   return (
     <div>
       <div className="navbar"> 
-        <Navbar1 />       
+        <Navbar />
       </div>
       
      <div className="section">
       <Section/>
      </div>
-
+     
+ 
      <div className="properties">
       <Properties/>
      </div>

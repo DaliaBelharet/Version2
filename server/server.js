@@ -5,6 +5,7 @@ require('dotenv').config({path:'./config/.env'});
 require('./config/db');
 const cors = require('cors');
 const authroute = require('../server/routes/user.routes');
+const formroute = require('../server/routes/form.routes');
 const {checkUser, requireAuth} = require ('./middlewares/auth.middleware');
 
 const app = express();
@@ -32,7 +33,9 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 
 // routes
-app.use('/api/v1/auth',authroute)
+app.use('/api/v1/auth',authroute) ;
+app.use('/api/v2/form', formroute);
+
 
 
 // server

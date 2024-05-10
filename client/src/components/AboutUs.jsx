@@ -31,7 +31,7 @@ const AboutUs = () => {
                             color: '#000', // Couleur de texte très noire
                         }}
                     >
-                        En tant qu'étudiantes en ingénierie informatique, notre objectif est de fournir des solutions technologiques de qualité, en particulier dans le domaine de l'immobilier. Nous sommes passionnées par l'utilisation de la technologie pour créer des expériences immersives, telles que des visites virtuelles de biens immobiliers. Notre engagement est d'offrir une satisfaction optimale en rendant la recherche de biens plus facile et plus enrichissante pour les utilisateurs.
+                       En tant qu'étudiantes en ingénierie informatique, nous sommes passionnées par la création de solutions technologiques de qualité. Nous nous investissons pleinement dans le développement d'expériences immersives, telles que des visites virtuelles de biens. Nous sommes déterminées à vous guider vers votre futur foyer, votre chez-vous idéal, en simplifiant la recherche de biens et en assurant votre satisfaction
                     </p>
                 </div>
             </div>
