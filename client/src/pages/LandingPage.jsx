@@ -3,6 +3,7 @@ import MainSection from '../components/MainSection';
 import Navbar from '../components/Navbar';
 import Footer from '../components/footer';
 import NosServices from '../components/NosServices';
+import AboutUs from '../components/AboutUs';
 
 const LandingPage = () => {
   return (
@@ -14,6 +15,10 @@ const LandingPage = () => {
       <div className="space-between-sections" style={styles.space}></div>
       <div className="nos-services">
         <NosServices />
+      </div>
+      <div className="space-between-sections" style={styles.space}></div>
+      <div className="about-us">
+        <AboutUs />
       </div>
       <div className="space-between-sections" style={styles.space}></div>
       <div className="footer-container"> 

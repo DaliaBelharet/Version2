@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import SignInForm from "./SignInForm";
 import Avatar from '@mui/material/Avatar';
 import axios from 'axios';
@@ -19,25 +20,28 @@ import background from '../../assets/House searching-bro.png';
 const defaultTheme = createTheme();
 
 const SignUp = () => {
-  const [pseudo, setPseudo] = useState('');
+  const [nomComplet, setNomComplet] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const response = await axios.post('http://localhost:5000/api/v1/auth/register', {
-        pseudo,
+        nomComplet,
         email,
         password,
         confirmPassword,
         phoneNumber,
-      });
+      },
+      {withCredentials: true});
       
       console.log('Réponse du serveur:', response.data);
+      navigate('/sign-in'); 
      
   
     } catch (error) {
@@ -69,15 +73,14 @@ const SignUp = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="username"
-                  name="pseudo"
+                  name="nomComplet"
                   required
                   fullWidth
-                  id="pseudo"
-                  label="Pseudo"
+                  id="nomComplet"
+                  label="Nom Complet"
                   autoFocus
-                  value={pseudo}
-                  onChange={(e) => setPseudo(e.target.value)}
+                  value={nomComplet}
+                  onChange={(e) => setNomComplet(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,10 +125,10 @@ const SignUp = () => {
                 <TextField
                   required
                   fullWidth
-                  name="telephone"
+                  name="phoneNumber"
                   label="Numéro de téléphone"
                   type="tel"
-                  id="telephone"
+                  id="phoneNumber"
                   autoComplete="tel"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
@@ -139,7 +142,6 @@ const SignUp = () => {
               </Grid>
             </Grid>
             <Button
-             href="./sign-in"
               type="submit"
               fullWidth
               variant="contained"

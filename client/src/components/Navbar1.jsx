@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
-import logo from "../assets/DARKOUM1.png"
+import { Link, useNavigate } from 'react-router-dom'; 
+import logo from "../assets/DARKOUM1.png";
+import Logout from '../pages/auth/logout';
 
 const Navbar = () => {
+    const handleLogout = async () => {
+        try {
+            await Logout(); // Appel de la fonction logout depuis le composant Logout
+        } catch (error) {
+            console.error("Erreur lors de la déconnexion :", error);
+            // Gérer les erreurs si nécessaire
+        }
+    };
+    
     return (
         <nav style={{ 
             position: 'fixed',
@@ -17,7 +27,7 @@ const Navbar = () => {
             justifyContent: 'space-between', 
             alignItems: 'center' 
         }}>
-             <img src={logo} alt="Logo" style={{ marginRight: 20 ,width:100,marginTop:0}} />
+            <img src={logo} alt="Logo" style={{ marginRight: 20 ,width:100,marginTop:0}} />
             <ul style={{ 
                 listStyle: 'none',
                 margin: 0,
@@ -43,12 +53,12 @@ const Navbar = () => {
                     marginLeft: 30
                 }}>
                     <a href="#">A propos</a>
-                    </li>
+                </li>
             </ul>
-
-            
-            <Link to="/sign-in" style={{ textDecoration: 'none' }}>
-                <button className="login-btn" style={{ 
+                      
+            <button 
+                className="logout-btn" 
+                style={{ 
                     backgroundColor: '#F27438',
                     color: 'white',
                     border: 'none',
@@ -56,8 +66,11 @@ const Navbar = () => {
                     borderRadius: 5,
                     cursor: 'pointer',
                     fontWeight: 'bold'
-                }}>Se connecter</button>
-            </Link>
+                }}
+                onClick={handleLogout} // Déclenchement de la déconnexion
+            >
+                Se déconnecter
+            </button>
         </nav>
     );
 }

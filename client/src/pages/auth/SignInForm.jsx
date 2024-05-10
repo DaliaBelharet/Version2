@@ -1,11 +1,15 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import Navbar from '../../components/Navbar'; 
+import Footer from '../../components/footer'; 
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -17,18 +21,39 @@ import logo from '../../assets/avtr.png';
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async(e) => {
+
+    e.preventDefault();
+    try {
+      const response = await axios(
+        {
+          method : "post",
+          url: `http://localhost:5000/api/v1/auth/login`,
+          withCredentials: true,
+          data: {
+              email,
+              password,
+          }
+      })
+      console.log(response.data);
+      navigate('/home'); 
+        // Gérer la réponse, par exemple rediriger l'utilisateur vers une page de confirmation
+    } catch (error) {
+        console.error("Erreur lors de la soumission du formulaire ",error);
+        // Gérer les erreurs, par exemple afficher un message d'erreur à l'utilisateur
+    }
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Navbar sx={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }} />
+      
+      <Grid container component="main" sx={{ height: '100vh', paddingTop: '64px' }}>
         <CssBaseline />
         <Grid
           item
@@ -38,7 +63,6 @@ export default function SignInSide() {
           sx={{
             backgroundImage: `url(${background})`,
             backgroundRepeat: 'no-repeat',
-          
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
@@ -48,6 +72,7 @@ export default function SignInSide() {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
+              marginTop: '200px',
               my: 8,
               mx: 4,
               display: 'flex',
@@ -59,7 +84,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5" fontWeight="bold">
               Connexion
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -67,6 +92,8 @@ export default function SignInSide() {
                 id="email"
                 label="Email"
                 name="email"
+                value={email}  // Ajout de l'attribut value
+                onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 autoFocus
               />
@@ -78,39 +105,43 @@ export default function SignInSide() {
                 label="Mot de passe"
                 type="password"
                 id="password"
+                value={password}  // Ajout de l'attribut value
+                onChange={(e) => setPassword(e.target.value)} 
                 autoComplete="current-password"
               />
+
+
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Se souvenir de moi"
               />     
               <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-              mt: 3,
-              mb: 2,
-              bgcolor: '#FF5733', 
-              '&:hover': {
-              bgcolor: '#E64A19',
-            },
-           }}
-            >
-            Se connecter
-           </Button>
+                type="submit"
+                onClick={handleSubmit}
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: '#FF5733', 
+                  '&:hover': {
+                    bgcolor: '#E64A19',
+                  },
+                }}
+              >
+                Se connecter
+              </Button>
               
-
               <Grid container>
                 <Grid item xs>
-                <Link href="#" variant="body2" sx={{ color: 'black' }}>
+                  <Link href="#" variant="body2" sx={{ color: 'black' }}>
                     Mot de passe oublié?
                   </Link>
                 </Grid>
                 <Grid item>
-                <Link href="/sign-up" variant="body2" sx={{ color: 'black', fontWeight: 'bold' }}>
-                {"Vous n'avez pas de compte ? Inscrivez-vous"}
-                </Link>
+                  <Link href="/sign-up" variant="body2" sx={{ color: 'black', fontWeight: 'bold' }}>
+                    {"Vous n'avez pas de compte ? Inscrivez-vous"}
+                  </Link>
                 </Grid>
               </Grid>
               
@@ -118,6 +149,9 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
+      <div className="footer-container"> 
+        <Footer />
+      </div>
     </ThemeProvider>
   );
 }

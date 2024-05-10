@@ -1,6 +1,8 @@
 const UserModel = require('../models/user.model');
+const { signUpErrors, signInErrors } = require('../utils/error.utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+
 
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
@@ -11,40 +13,38 @@ const createToken = (id) => {
 }
 
 module.exports.signUp = async (req, res) => {
-    console.log(req.body);
-    const {pseudo, email, password, phoneNumber} = req.body;
-    if (!pseudo || !email || !password || !phoneNumber) {
-        return res.status(400).json({error: 'Veuillez remplir tous les champs obligatoires.'});
-    }
+    const {nomComplet, email, password, phoneNumber} = req.body;
+    
     try {  
-      const user = new UserModel({pseudo, email, password, phoneNumber});
-      await user.save()
+      const user = await UserModel.create({nomComplet, email, password, phoneNumber});
   
         res.status(201).json({user: user._id});
     } catch (err) {
-      console.error("erreur lors de l\inscription",err);
+      // const errors = signUpErrors(err) 
       res.status(200).json(err);
     }
  }
 
-module.exports.signIn = async (req, res) => {
-   const {email, password} = req.body
-   try {
-      const user = await UserModel.login(email, password);
-      const token = createToken(user._id);
-      res.cookie('jwt', token, {httpOnly: true, maxAge});
-      res.status(200).json({user: user._id})
-   }
-   catch (err) {
-      const errors = signInErrors(err);
-      res.status(200).json({errors});
-   }
+ module.exports.signIn = async (req, res) => {
+  const {email, password} = req.body
+  try {
+     const user = await UserModel.login(email, password);
+     const token = createToken(user._id);
+     res.cookie('jwt', token, {httpOnly: true, maxAge});
+     res.status(200).json({user: user._id})
+  }
+  catch (err) {
+     const errors = signInErrors(err) 
+     res.status(200).json({errors});
+  }
 }
 
+
 module.exports.logOut = (req, res) => {
+  
    res.cookie('jwt', '',{maxAge: 1});
    res.redirect('/');
-
+   console.log("logoutback");
 }
 
 // Fonction pour générer un code OTP
@@ -123,5 +123,3 @@ exports.resetMotDePasse = async (req, res) => {
     res.status(500).json({ message: 'Erreur lors de la réinitialisation du mot de passe' });
   }
 };
-
-

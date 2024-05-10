@@ -1,14 +1,15 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar1 from '../components/Navbar1';
 import Footer from '../components/footer';
 import Section from '../components/Section';
 import Properties from '../components/properties';
+
 
 const Home = () => {
   return (
     <div>
       <div className="navbar"> 
-        <Navbar />
+        <Navbar1 />       
       </div>
       
      <div className="section">

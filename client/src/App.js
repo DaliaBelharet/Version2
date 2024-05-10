@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import SignInForm from '../src/pages/auth/SignInForm'; 
 import SignUpForm from '../src/pages/auth/SignUpForm';
 import LandingPage from './pages/LandingPage';
-import Home from './pages/Home'
+import Home from './pages/Home';
+import Logout from './pages/auth/logout';
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/logout' element={<Logout />} />
+
 
         
       </Routes>
